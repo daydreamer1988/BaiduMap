@@ -1,10 +1,14 @@
 package com.austin.baidumap;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Vibrator;
 import android.util.Log;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
+import com.baidu.location.BDNotifyListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.Poi;
@@ -20,6 +24,8 @@ import java.util.List;
 
 public class BaiduLocationManager {
 
+    private static final int HANDLER_MESSAGE_RECEIVE_LOCATION = 0x1011;
+
     private static Context mContext;
 
     private String TAG = "BaiduLocationManager";
@@ -34,6 +40,14 @@ public class BaiduLocationManager {
 
     private static Object objLock = new Object();
 
+    private Vibrator mVibrator;
+
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+        }
+    };
 
 
     private BaiduLocationManager(Context applicationContext){
@@ -91,11 +105,17 @@ public class BaiduLocationManager {
         mLocationListener = new BDLocationListener() {
             @Override
             public void onReceiveLocation(final BDLocation location) {
-
-                if (mActivityCallback != null) {
-                    mActivityCallback.onReceiveLocation(location);
-                }
-                showDefaultInfo(location, true);
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mActivityCallback != null) {
+                            mActivityCallback.onReceiveLocation(location);
+                        }
+                        if(BuildConfig.DEBUG) {
+                            showDefaultInfo(location, true);
+                        }
+                    }
+                });
             }
             @Override
             public void onConnectHotSpotMessage(String s, int i) {
@@ -208,6 +228,28 @@ public class BaiduLocationManager {
         return sb.toString();
     }
 
+
+    public void registNotifyListener(BDNotifyListener notifyListener) {
+        if(mContext!=null && mClient!=null) {
+            mVibrator = (Vibrator) mContext.getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+            mClient.registerNotify(notifyListener);
+        }
+    }
+
+    public void unregistNotifyListener(BDNotifyListener notifyListener) {
+        if(mClient!=null && notifyListener!=null)
+        mClient.removeNotifyEvent(notifyListener);
+    }
+
+
+    public interface OnReceiveBaiduLocationListener{
+        void onReceiveLocation(BDLocation location);
+    }
+
+    public void setOnReceiveBaiduLocationListener(OnReceiveBaiduLocationListener listener) {
+        mActivityCallback = listener;
+    }
+
     public void onStop() {
         synchronized (objLock) {
             if(mClient != null && mClient.isStarted()){
@@ -224,14 +266,6 @@ public class BaiduLocationManager {
         }
     }
 
-
-    public interface OnReceiveBaiduLocationListener{
-        void onReceiveLocation(BDLocation location);
-    }
-
-    public void setOnReceiveBaiduLocationListener(OnReceiveBaiduLocationListener listener) {
-        mActivityCallback = listener;
-    }
 
     public void onDestroy() {
         if (mClient != null) {
