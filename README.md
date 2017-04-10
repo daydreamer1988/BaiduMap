@@ -30,8 +30,9 @@ LocationMode.Battery_Saving与LocationClientOption.LOC_SENSITIVITY_MIDDLE对应
 LocationMode.Device_Sensors与LocationClientOption.LOC_SENSITIVITY_LOW对应
 
 
-7.
+7.setOpenAutoNotifyMode(int minTimeInterval, int minDistance, int locSensitivity)
 
+设置打开自动回调位置模式，该开关打开后，期间只要定位SDK检测到位置变化就会主动回调给开发者
 
 
 
