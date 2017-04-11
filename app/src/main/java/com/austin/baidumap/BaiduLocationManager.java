@@ -94,6 +94,7 @@ public class BaiduLocationManager {
             }
         }
         return mInstance;
+
     }
 
 
@@ -158,6 +159,8 @@ public class BaiduLocationManager {
             }
 
         };
+
+
 
         mClient.registerLocationListener(mLocationListener);
 

@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.austin.baidumap.activities.BasicmapActivity;
 import com.austin.baidumap.activities.LocationActivity;
 
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private List<String> getData() {
         List<String> data = new ArrayList<>();
         data.add("基础定位");
+        data.add("基础地图");
         return data;
     }
 
@@ -45,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     clz = LocationActivity.class;
                     break;
+                case 1:
+                    clz = BasicmapActivity.class;
             }
 
             startActivity(new Intent(MainActivity.this, clz));

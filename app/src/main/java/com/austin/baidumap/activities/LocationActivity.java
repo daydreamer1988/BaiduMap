@@ -119,6 +119,8 @@ public class LocationActivity extends AppCompatActivity {
                                 Toast.makeText(LocationActivity.this, "到达指定地点", Toast.LENGTH_SHORT).show();
                             }
                         });
+
+                location.getGpsAccuracyStatus();
             }
         });
 
