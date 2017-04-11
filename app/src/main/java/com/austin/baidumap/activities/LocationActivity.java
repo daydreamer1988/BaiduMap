@@ -15,6 +15,7 @@ import com.austin.baidumap.R;
 import com.austin.baidumap.utils.GpsUtil;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
+import com.baidu.location.BDNotifyListener;
 import com.baidu.location.LocationClient;
 
 public class LocationActivity extends AppCompatActivity {
@@ -25,6 +26,7 @@ public class LocationActivity extends AppCompatActivity {
     private CheckBox mCheckBox;
     private TextView mTextView;
     private ContentObserver contentObserver;
+    private BDNotifyListener notifyListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +70,7 @@ public class LocationActivity extends AppCompatActivity {
 
         /**
          * 方法二，回调在子线程中，所以更新UI有些麻烦， 并且在onDestory时需要将返回的ContentObserver注销掉。
+         *       当然也可以在GpsUtil中通过Handler切换到主线程。
          */
 //        contentObserver = GpsUtil.registerGpsObserver(this, new GpsUtil.OnRegistGpsStateListener() {
 //            @Override
@@ -85,27 +88,39 @@ public class LocationActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(mBaiduLocationManager!=null)
+
+        if(mBaiduLocationManager!=null) {
+            //stop location
             mBaiduLocationManager.onDestroy();
-        GpsUtil.unregisterContentObserver(this,contentObserver);
+            //stop notify
+            mBaiduLocationManager.unregistNotifyListener();
+        }
+        //stop gps listener
+//      GpsUtil.unregisterContentObserver(this,contentObserver);
     }
 
     public void startLocate(View view) {
 
         mBaiduLocationManager = MyApplication.getLocationManager();
-        mBaiduLocationManager.setOnReceiveBaiduLocationListener(new BaiduLocationManager.OnReceiveBaiduLocationListener() {
+
+        mBaiduLocationManager.setOnReceiveBaiduLocationListener(true, new BaiduLocationManager.OnReceiveBaiduLocationListener() {
             @Override
             public void onReceiveLocation(BDLocation location) {
                 mTextView.setText(mBaiduLocationManager.showDefaultInfo(location, false));
+                mBaiduLocationManager.registNotifyListener(
+                        location.getLatitude(),
+                        location.getLongitude(),
+                        3000,
+                        location.getCoorType(),
+                        true,
+                        new BaiduLocationManager.OnNotifyListener() {
+                            @Override
+                            public void onNotify(BDLocation bdLocation, float distance) {
+                                Toast.makeText(LocationActivity.this, "到达指定地点", Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
         });
-
-      /*  mBaiduLocationManager.setNotifyListener(new BDNotifyListener() {
-            @Override
-            public void onNotify(BDLocation bdLocation, float v) {
-                super.onNotify(bdLocation, v);
-            }
-        });*/
 
         mBaiduLocationManager.onStart();
     }

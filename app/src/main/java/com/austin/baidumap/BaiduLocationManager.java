@@ -38,7 +38,7 @@ public class BaiduLocationManager {
 
     private OnReceiveBaiduLocationListener mActivityCallback;
 
-    private static Object objLock = new Object();
+    private static final Object objLock = new Object();
 
     private Vibrator mVibrator;
 
@@ -49,11 +49,42 @@ public class BaiduLocationManager {
         }
     };
 
+    private LocationClientOption option;
 
+    private boolean logLocationMsg = true;
+    private BDNotifyListener localNotifyListener;
+
+
+    /**
+     * location callback interface
+     */
+    public interface OnReceiveBaiduLocationListener{
+        void onReceiveLocation(BDLocation location);
+    }
+
+
+    /**
+     * notify callback interface
+     */
+    public interface OnNotifyListener{
+        void onNotify(BDLocation bdLocation, float distance);
+    }
+
+
+    /**
+     * private constructor
+     * @param applicationContext
+     */
     private BaiduLocationManager(Context applicationContext){
         initLocationClient(applicationContext);
     }
 
+
+    /**
+     * singleton getInstance
+     * @param context
+     * @return
+     */
     public static BaiduLocationManager getInstance(Context context){
         mContext = context;
         if (mInstance == null) {
@@ -66,9 +97,14 @@ public class BaiduLocationManager {
     }
 
 
+    /**
+     * initial the LocationClientOption
+     * getLocationOption() to get the default option
+     * @param applicationContext
+     */
     private void initLocationClient(Context applicationContext){
         mClient = new LocationClient(applicationContext);
-        LocationClientOption option = new LocationClientOption();
+        option = new LocationClientOption();
         //默认只定位一次
         //时间不能小于1000ms 否则定时失败
         option.setScanSpan(3000);
@@ -111,7 +147,7 @@ public class BaiduLocationManager {
                         if (mActivityCallback != null) {
                             mActivityCallback.onReceiveLocation(location);
                         }
-                        if(BuildConfig.DEBUG) {
+                        if(logLocationMsg) {
                             showDefaultInfo(location, true);
                         }
                     }
@@ -125,6 +161,90 @@ public class BaiduLocationManager {
 
         mClient.registerLocationListener(mLocationListener);
 
+    }
+
+
+    /**
+     * get the default LocationClientOption and custom it.
+     */
+    public LocationClientOption getLocationOption(){
+        return option;
+    }
+
+    public void setOnReceiveBaiduLocationListener(boolean logLocationMsg, OnReceiveBaiduLocationListener listener) {
+        this.logLocationMsg = logLocationMsg;
+        mActivityCallback = listener;
+    }
+
+
+    /**
+     * 位置提醒最多提醒3次，3次过后将不再提醒
+     * 可通过函数SetNotifyLocation()来实现再次提醒
+     * @param lat
+     * @param lng
+     * @param radius
+     * @param coorType
+     * @param needVibrate
+     * @param onNotifyListener
+     */
+    public void registNotifyListener(final double lat, final double lng, final float radius, final String coorType, final boolean needVibrate, final OnNotifyListener onNotifyListener) {
+        if(mContext!=null && mClient!=null && localNotifyListener ==null) {
+            mVibrator = (Vibrator) mContext.getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+            localNotifyListener = new BDNotifyListener() {
+                @Override
+                public void onNotify(BDLocation bdLocation, float v) {
+                    super.onNotify(bdLocation, v);
+                    if(needVibrate){
+                        mVibrator.vibrate(1000);
+                    }
+                    onNotifyListener.onNotify(bdLocation, v);
+                }
+            };
+            localNotifyListener.SetNotifyLocation(lat, lng, radius, coorType);
+            mClient.registerNotify(localNotifyListener);
+        }
+    }
+
+    public void unregistNotifyListener() {
+        if(mClient!=null && localNotifyListener !=null) {
+            mClient.removeNotifyEvent(localNotifyListener);
+            localNotifyListener = null;
+        }
+    }
+
+
+    /**
+     * 1. stop location service
+     * 2. remove nofity event.
+     */
+    public void onStop() {
+        synchronized (objLock) {
+            if(mClient != null && mClient.isStarted()){
+                mClient.stop();
+            }
+        }
+    }
+
+    /**
+     * start location
+     */
+    public void onStart() {
+        synchronized (objLock) {
+            if(mClient != null && !mClient.isStarted()){
+                mClient.start();
+            }
+        }
+    }
+
+    /**
+     * when the activity destroyed, call this to release some resouces.
+     */
+    public void onDestroy() {
+        if (mClient != null) {
+            mClient.stop();
+            //can not unRegisterLocationListener, cause we initialize the LocationClient in the Application
+            //mClient.unRegisterLocationListener(mLocationListener);
+        }
     }
 
     public String showDefaultInfo(BDLocation location, boolean showLog){
@@ -228,49 +348,4 @@ public class BaiduLocationManager {
         return sb.toString();
     }
 
-
-    public void registNotifyListener(BDNotifyListener notifyListener) {
-        if(mContext!=null && mClient!=null) {
-            mVibrator = (Vibrator) mContext.getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-            mClient.registerNotify(notifyListener);
-        }
-    }
-
-    public void unregistNotifyListener(BDNotifyListener notifyListener) {
-        if(mClient!=null && notifyListener!=null)
-        mClient.removeNotifyEvent(notifyListener);
-    }
-
-
-    public interface OnReceiveBaiduLocationListener{
-        void onReceiveLocation(BDLocation location);
-    }
-
-    public void setOnReceiveBaiduLocationListener(OnReceiveBaiduLocationListener listener) {
-        mActivityCallback = listener;
-    }
-
-    public void onStop() {
-        synchronized (objLock) {
-            if(mClient != null && mClient.isStarted()){
-                mClient.stop();
-            }
-        }
-    }
-
-    public void onStart() {
-        synchronized (objLock) {
-            if(mClient != null && !mClient.isStarted()){
-                mClient.start();
-            }
-        }
-    }
-
-
-    public void onDestroy() {
-        if (mClient != null) {
-            mClient.unRegisterLocationListener(mLocationListener);
-            mClient.stop();
-        }
-    }
 }

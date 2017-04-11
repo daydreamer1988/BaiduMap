@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private List<String> getData() {
         List<String> data = new ArrayList<>();
         data.add("基础定位");
-
         return data;
     }
 
