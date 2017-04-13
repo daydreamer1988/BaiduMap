@@ -1,12 +1,12 @@
 # BaiduMap
 
-1.avd不能测试定位功能
+-1.avd不能测试定位功能
 
-2.Authentication Error errorcode: 200 uid: -1 appid -1 msg: APP不存在，
+-2.Authentication Error errorcode: 200 uid: -1 appid -1 msg: APP不存在，
   
     原因：AK配置问题。
 
-3.定位退出当前Activity时， 报ServiceConnectionLeaked问题：
+-3.定位退出当前Activity时， 报ServiceConnectionLeaked问题：
 
     原因：在new LocationClient(Context context); 时，这里的context不能写成this, 应该写为getApplicationContext();
 
@@ -39,7 +39,9 @@ LocationMode.Device_Sensors与LocationClientOption.LOC_SENSITIVITY_LOW对应
 
 8. 使用MapView切换Activity时，会出现短暂的黑屏现象
 
-解决方法：使用TextureMapView
+解决方法：使用TextureMapView,同时通过TextureMapView 的 setBackgroundColor()方法可以设置切换Activity的背景颜色。
+
+注意：MapView通过以上方法设置背景色不起作用，还是短暂黑屏。
 
 
 
