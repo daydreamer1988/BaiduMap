@@ -142,6 +142,7 @@ public class BaiduLocationManager {
         mLocationListener = new BDLocationListener() {
             @Override
             public void onReceiveLocation(final BDLocation location) {
+
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
