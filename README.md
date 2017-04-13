@@ -1,6 +1,6 @@
 # BaiduMap
 
--1.avd不能测试定位功能
+- 1.avd不能测试定位功能
 
 -2.Authentication Error errorcode: 200 uid: -1 appid -1 msg: APP不存在，
   
