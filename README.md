@@ -35,7 +35,11 @@ LocationMode.Device_Sensors与LocationClientOption.LOC_SENSITIVITY_LOW对应
 设置打开自动回调位置模式，该开关打开后，期间只要定位SDK检测到位置变化就会主动回调给开发者
 
 
+/////////////////////////////////
 
+8. 使用MapView切换Activity时，会出现短暂的黑屏现象
+
+解决方法：使用TextureMapView
 
 
 
