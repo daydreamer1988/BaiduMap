@@ -1,16 +1,19 @@
-package com.austin.baidumap.activities;
+package com.austin.baidumap.activities.BasicMap;
 
-import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.austin.baidumap.R;
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapViewLayoutParams;
 import com.baidu.mapapi.map.TextureMapView;
-import com.baidu.mapapi.model.LatLng;
 
 public class BasicmapActivity extends AppCompatActivity {
     private String TAG = "BasicmapActivity";
@@ -25,40 +28,35 @@ public class BasicmapActivity extends AppCompatActivity {
         mMapView = (TextureMapView) findViewById(R.id.mapView);
         mBaiduMap = mMapView.getMap();
 
+        mMapView.getMap().setOnMapStatusChangeListener(new BaiduMap.OnMapStatusChangeListener() {
+            @Override
+            public void onMapStatusChangeStart(MapStatus mapStatus) {
 
-        //获得初始经纬度
-        LatLng target = mBaiduMap.getMapStatus().target;
-//        Log.e(TAG, target.toString());
-//        int mapLevel = mMapView.getMapLevel();
-//        //E/BasicmapActivity: initial map level:5000
-//        Log.e(TAG, "initial map level:" + mapLevel);
+            }
 
-        //设置地图加载前的背景颜色
-        mMapView.setBackgroundColor(Color.parseColor("#00afec"));
+            @Override
+            public void onMapStatusChange(MapStatus mapStatus) {
+
+            }
+
+            @Override
+            public void onMapStatusChangeFinish(MapStatus mapStatus) {
+                Toast.makeText(BasicmapActivity.this, "中间点的坐标：\n" +mapStatus.target.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        mBaiduMap.setOnMapLoadedCallback(new BaiduMap.OnMapLoadedCallback() {
+            @Override
+            public void onMapLoaded() {
+                addView();
+            }
+        });
 
     }
 
-
-    /*
-    MapViewLayoutParams params2 = new MapViewLayoutParams.Builder()
-                .layoutMode(MapViewLayoutParams.ELayoutMode.absoluteMode)
-                .width(80)
-                .height(80)
-                //ElayoutMode.absoluteMode下必须设置
-                //注意point的点是以图片的左下角为标准的。所以下面设置中心点的Y值是加上图片高度的一半
-//                .point(new Point(mMapView.getWidth()/2, mMapView.getHeight()/2))
-                .point(new Point(0, 0))
-//                .position(target) //ElayoutMode.mapMode下必须设置， 如果是图片的话，滑动地图图片移动不是特别的顺畅
-                .build();
-
-        mMapView.addView(imageView, params);
-     */
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-
+    private void addView() {
         //addView();
-        ImageView imageView1 = new ImageView(this);
+        final ImageView imageView1 = new ImageView(this);
         imageView1.setImageResource(R.mipmap.ic_launcher);
 
         //左上角
@@ -71,9 +69,16 @@ public class BasicmapActivity extends AppCompatActivity {
                 .build();
         mMapView.addView(imageView1, params);
 
+        imageView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMapView.removeView(imageView1);
+            }
+        });
+
 
         //右上角
-        ImageView imageView2 = new ImageView(this);
+        final ImageView imageView2 = new ImageView(this);
         imageView2.setImageResource(R.mipmap.ic_launcher);
         MapViewLayoutParams params2 = new MapViewLayoutParams.Builder()
                 .layoutMode(MapViewLayoutParams.ELayoutMode.absoluteMode)
@@ -83,11 +88,16 @@ public class BasicmapActivity extends AppCompatActivity {
                 .point(new Point(mMapView.getWidth(), 0))
                 .build();
         mMapView.addView(imageView2, params2);
-
+        imageView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMapView.removeView(imageView2);
+            }
+        });
 
 
         //左下角
-        ImageView imageView3 = new ImageView(this);
+        final ImageView imageView3 = new ImageView(this);
         imageView3.setImageResource(R.mipmap.ic_launcher);
         MapViewLayoutParams params3 = new MapViewLayoutParams.Builder()
                 .layoutMode(MapViewLayoutParams.ELayoutMode.absoluteMode)
@@ -97,10 +107,15 @@ public class BasicmapActivity extends AppCompatActivity {
                 .point(new Point(0, mMapView.getHeight()))
                 .build();
         mMapView.addView(imageView3, params3);
-
+        imageView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMapView.removeView(imageView3);
+            }
+        });
 
         //右下角
-        ImageView imageView4 = new ImageView(this);
+        final ImageView imageView4 = new ImageView(this);
         imageView4.setImageResource(R.mipmap.ic_launcher);
         MapViewLayoutParams params4 = new MapViewLayoutParams.Builder()
                 .layoutMode(MapViewLayoutParams.ELayoutMode.absoluteMode)
@@ -110,10 +125,15 @@ public class BasicmapActivity extends AppCompatActivity {
                 .point(new Point(mMapView.getWidth(), mMapView.getHeight()))
                 .build();
         mMapView.addView(imageView4, params4);
-
+        imageView4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMapView.removeView(imageView4);
+            }
+        });
 
         //top center
-        ImageView imageView5 = new ImageView(this);
+        final ImageView imageView5 = new ImageView(this);
         imageView5.setImageResource(R.mipmap.ic_launcher);
         MapViewLayoutParams params5 = new MapViewLayoutParams.Builder()
                 .layoutMode(MapViewLayoutParams.ELayoutMode.absoluteMode)
@@ -123,11 +143,16 @@ public class BasicmapActivity extends AppCompatActivity {
                 .point(new Point(mMapView.getWidth() / 2, 0))
                 .build();
         mMapView.addView(imageView5, params5);
-
+        imageView5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMapView.removeView(imageView5);
+            }
+        });
 
 
         //bottom center
-        ImageView imageView6 = new ImageView(this);
+        final ImageView imageView6 = new ImageView(this);
         imageView6.setImageResource(R.mipmap.ic_launcher);
         MapViewLayoutParams params6 = new MapViewLayoutParams.Builder()
                 .layoutMode(MapViewLayoutParams.ELayoutMode.absoluteMode)
@@ -137,10 +162,15 @@ public class BasicmapActivity extends AppCompatActivity {
                 .point(new Point(mMapView.getWidth() / 2, mMapView.getHeight()))
                 .build();
         mMapView.addView(imageView6, params6);
-
+        imageView6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMapView.removeView(imageView6);
+            }
+        });
 
         //left center
-        ImageView imageView7 = new ImageView(this);
+        final ImageView imageView7 = new ImageView(this);
         imageView7.setImageResource(R.mipmap.ic_launcher);
         MapViewLayoutParams params7 = new MapViewLayoutParams.Builder()
                 .layoutMode(MapViewLayoutParams.ELayoutMode.absoluteMode)
@@ -150,10 +180,15 @@ public class BasicmapActivity extends AppCompatActivity {
                 .point(new Point(0, mMapView.getHeight()/2))
                 .build();
         mMapView.addView(imageView7, params7);
-
+        imageView7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMapView.removeView(imageView7);
+            }
+        });
 
         //right center
-        ImageView imageView8 = new ImageView(this);
+        final ImageView imageView8 = new ImageView(this);
         imageView8.setImageResource(R.mipmap.ic_launcher);
         MapViewLayoutParams params8 = new MapViewLayoutParams.Builder()
                 .layoutMode(MapViewLayoutParams.ELayoutMode.absoluteMode)
@@ -163,9 +198,14 @@ public class BasicmapActivity extends AppCompatActivity {
                 .point(new Point(mMapView.getWidth(), mMapView.getHeight()/2))
                 .build();
         mMapView.addView(imageView8, params8);
-
+        imageView8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMapView.removeView(imageView8);
+            }
+        });
         //center
-        ImageView imageView9 = new ImageView(this);
+        final ImageView imageView9 = new ImageView(this);
         imageView9.setImageResource(R.mipmap.ic_launcher);
         MapViewLayoutParams params9 = new MapViewLayoutParams.Builder()
                 .layoutMode(MapViewLayoutParams.ELayoutMode.absoluteMode)
@@ -175,7 +215,42 @@ public class BasicmapActivity extends AppCompatActivity {
                 .point(new Point(mMapView.getWidth()/2, mMapView.getHeight()/2))
                 .build();
         mMapView.addView(imageView9, params9);
+        imageView9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //方案1：直接消失
+                //mMapView.removeView(imageView9);
 
+                //方案2：动画消失
+
+                Animation animation = new AlphaAnimation(1, 0);
+                animation.setDuration(1000);
+                animation.setFillAfter(true);
+                imageView9.startAnimation(animation);
+                animation.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        mMapView.removeView(imageView9);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+                    }
+                });
+            }
+        });
+    }
+
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        //这里会多次调用，可以在添加的控件上做文章，判断是否为空，为空才重新添加
+        //addView();
     }
 
     @Override

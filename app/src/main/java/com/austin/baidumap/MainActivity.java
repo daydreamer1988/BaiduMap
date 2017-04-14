@@ -8,7 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.austin.baidumap.activities.BasicmapActivity;
+import com.austin.baidumap.activities.BasicMap.BasicmapListActivity;
 import com.austin.baidumap.activities.LocationActivity;
 
 import java.util.ArrayList;
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                     clz = LocationActivity.class;
                     break;
                 case 1:
-                    clz = BasicmapActivity.class;
+                    clz = BasicmapListActivity.class;
             }
 
             startActivity(new Intent(MainActivity.this, clz));
