@@ -46,7 +46,9 @@ LocationMode.Device_Sensors与LocationClientOption.LOC_SENSITIVITY_LOW对应
 
 9.  设置自定义的样式，亲测只能使用MapView,而不能使用TextureMapView，不然不起作用
 
-
+10. 交通图(zoom 7 scale100公里 以上才有效)
+  
+    城市热力图(zoom 11 scale10公里以上才有效)
 
 
 
