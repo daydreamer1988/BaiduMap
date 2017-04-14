@@ -68,6 +68,13 @@ public class BasicmapListActivity extends AppCompatActivity {
                     "MapView.setCustomMapStylePath(FilePath)\n"+
                     "MapView.setMapCustomEnable()",
                     CustomMapActivity.class),
+            new ActivityInfo("设置mapType,及热力图，交通图",
+                    "mBaiduMap.setMapType()\n" +
+                    "   BaiduMap.MAP_TYPE_NORMAL\n" +
+                    "   BaiduMap.MAP_TYPE_SATELLITE\n" +
+                    "BaiduMap.setTrafficEnabled()\n" +
+                    "BaiduMap.setBaiduHeatMapEnabled()",
+                    MapTypeActivity.class),
 
     };
 

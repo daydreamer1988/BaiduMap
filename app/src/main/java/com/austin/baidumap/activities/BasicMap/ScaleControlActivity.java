@@ -40,11 +40,11 @@ public class ScaleControlActivity extends AppCompatActivity {
                         int x = (int) motionEvent.getX();
                         int y = (int) motionEvent.getY();
                         mMapView.setScaleControlPosition(new Point(x, y));
-
                     }
                 });
             }
         });
+
     }
 
 
