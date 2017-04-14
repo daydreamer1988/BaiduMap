@@ -44,7 +44,7 @@ LocationMode.Device_Sensors与LocationClientOption.LOC_SENSITIVITY_LOW对应
 注意：MapView通过以上方法设置背景色不起作用，还是短暂黑屏。
 
 
-9.  设置自定义的样式，亲测只能使用MapView,而不能使用TextureMapView
+9.  设置自定义的样式，亲测只能使用MapView,而不能使用TextureMapView，不然不起作用
 
 
 
