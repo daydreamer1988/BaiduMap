@@ -51,8 +51,12 @@ LocationMode.Device_Sensors与LocationClientOption.LOC_SENSITIVITY_LOW对应
     城市热力图(zoom 11 scale10公里以上才有效)
 
 
+11. 可以通过设置MapView的PaddingBottom为负数，来隐藏百度Logo
 
 
+12. 发现设置padding后，有时不会立即更新，当mapview 状态发生变化（双击，移动等）后，padding生效。
+
+    解决方法，addView() 随意加一个布局，使其调用MapView.onLayout()方法重绘。
 
 
 
