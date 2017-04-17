@@ -22,18 +22,15 @@ public class ScaleControlActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scale_control);
         mMapView = (TextureMapView) findViewById(R.id.mapView);
         textView2 = (TextView) findViewById(R.id.textView2);
+
         mMapView.getMap().setOnMapLoadedCallback(new BaiduMap.OnMapLoadedCallback() {
             @Override
             public void onMapLoaded() {
+
                 textView2.setText("比例尺 宽*高:" + mMapView.getScaleControlViewWidth() + "*" + mMapView.getScaleControlViewHeight()+"\n" +
                         "看原代码，返回的宽高是相同的");
-            }
-        });
 
 
-        mMapView.getMap().setOnMapLoadedCallback(new BaiduMap.OnMapLoadedCallback() {
-            @Override
-            public void onMapLoaded() {
                 mMapView.getMap().setOnMapTouchListener(new BaiduMap.OnMapTouchListener() {
                     @Override
                     public void onTouch(MotionEvent motionEvent) {
@@ -46,6 +43,7 @@ public class ScaleControlActivity extends AppCompatActivity {
         });
 
     }
+
 
 
     public void toggle(View view) {

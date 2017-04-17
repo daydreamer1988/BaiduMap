@@ -33,9 +33,13 @@ public class GetMapLevelActivity extends AppCompatActivity {
 
             @Override
             public void onMapStatusChangeFinish(MapStatus mapStatus) {
-                float zoom = mMapView.getMap().getMapStatus().zoom;
                 int mapLevel = mMapView.getMapLevel();
-                Toast.makeText(GetMapLevelActivity.this, "mapLevel:" + mapLevel +"\nzoom:"+zoom, Toast.LENGTH_SHORT).show();
+                Toast.makeText(GetMapLevelActivity.this,
+                        "mapLevel:" + mapLevel +"\n" +
+                                "zoom:"+mapStatus.zoom + "\n" +
+                                "rotate:"+mapStatus.rotate + "\n" +
+                                "overlook:"+mapStatus.overlook,
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }

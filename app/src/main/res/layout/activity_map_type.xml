@@ -30,6 +30,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/radioButton2" />
+
+        <RadioButton
+            android:text="空白地图"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButton3" />
     </RadioGroup>
 
     <CheckBox
@@ -48,5 +54,14 @@
         android:id="@+id/checkBox2"
         android:layout_above="@+id/radioGroup"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:onClick="isTrafficEnabled"
+        android:text="是否打开了交通图"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/button6" />
 
 </RelativeLayout>

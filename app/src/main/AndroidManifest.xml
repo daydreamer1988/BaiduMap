@@ -49,9 +49,9 @@
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="qIcK8DCqMoFwhElfPUs2GqGzWvHUW44A"/>
-            <!--qIcK8DCqMoFwhElfPUs2GqGzWvHUW44A 家里电脑-->
-            <!--IEwCPPCUuY9rik1XrB7m5jaGPNQHR69k 公司电脑-->
+            android:value="IEwCPPCUuY9rik1XrB7m5jaGPNQHR69k" />
+        <!-- qIcK8DCqMoFwhElfPUs2GqGzWvHUW44A 家里电脑 -->
+        <!-- IEwCPPCUuY9rik1XrB7m5jaGPNQHR69k 公司电脑 -->
 
         <activity android:name=".activities.LocationActivity" />
         <activity android:name=".activities.BasicMap.BasicmapActivity" />
@@ -64,7 +64,17 @@
         <activity android:name=".activities.BasicMap.ZoomControlActivity" />
         <activity android:name=".activities.BasicMap.PaddingActivity" />
         <activity android:name=".activities.BasicMap.CustomMapActivity" />
-        <activity android:name=".activities.BasicMap.MapTypeActivity"></activity>
+        <activity android:name=".activities.BasicMap.MapTypeActivity" />
+        <activity android:name=".activities.BasicMap.MapViewTouchEventActivity" />
+        <activity android:name=".activities.BasicMap.MapControlActivity" />
+        <activity android:name=".activities.BasicMap.CompassActivity" />
+        <activity android:name=".activities.BasicMap.MyLocationConfigurationActivity" />
+        <activity android:name=".activities.BasicMap.ZoomLevelActivity" />
+        <activity android:name=".activities.BasicMap.BaiduHeatMapActivity" />
+        <activity android:name=".activities.BasicMap.IsShowPoiActivity" />
+        <activity android:name=".activities.BasicMap.UiSettingsActivity" />
+        <activity android:name=".activities.BasicMap.InfoWindowActivity"></activity>
+        <activity android:name=".activities.BasicMap.InfoWindowActivity2"></activity>
     </application>
 
 </manifest>
