@@ -61,7 +61,11 @@ LocationMode.Device_Sensors与LocationClientOption.LOC_SENSITIVITY_LOW对应
               推荐使用 mBaiduMap.setPadding(left, top, right, bottom);
     
           
+13.InfoWindow 在状态改变的时候显示一层，状态不改变的情况下，感觉是两个图片叠在了一起（两层）
 
+    解决办法：在更新InfoWindow内容前，mBaiduMap.hideInfoWindow(); 并在更新后,mBaiduMap.showInfoWindow(infoWindow);
+          
+          或在状态更新时，让InfoWindow消失，状态结束后再显示。
 
 
 
