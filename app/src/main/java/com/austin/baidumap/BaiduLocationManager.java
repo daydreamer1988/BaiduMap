@@ -120,6 +120,9 @@ public class BaiduLocationManager {
         //默认为高精度定位模式。
         option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
 
+        //是否需要设备方向
+        option.setNeedDeviceDirect(true);
+
         //设置坐标类型，默认GCJ02
         option.setCoorType(BDLocation.BDLOCATION_GCJ02_TO_BD09LL);
 

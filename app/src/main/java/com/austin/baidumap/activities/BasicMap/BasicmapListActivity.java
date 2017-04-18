@@ -119,8 +119,12 @@ public class BasicmapListActivity extends AppCompatActivity {
                             "",
                     BaiduHeatMapActivity.class),
             new ActivityInfo("是否显示底图默认Poi",
-                    "mMapView.showMapPoi()",
+                    "mBaiduMap.showMapPoi()",
                     IsShowPoiActivity.class),
+            new ActivityInfo("Projection(OnMapLoadedCallback.onMapLoaded()之后才正常)",
+                    "mProjection().toScreenLocation(latLng)\n" +
+                    "mProjection().fromScreenLocation(point)",
+                    ProjectionActivity.class),
 
             //--------------------------------------------------------
 
@@ -177,11 +181,28 @@ public class BasicmapListActivity extends AppCompatActivity {
 
             //--------------------------------------------------------
 
+            new ActivityInfo("===定位===",
+                    "|__________",
+                    null),
+
+            new ActivityInfo("定位我的位置",
+                    "解决了一开始定位北京的问题\n" +
+                    "解决了网速慢的情况下一直显示空白页的问题",
+                    MyLocationSimpleActivity.class),
+
+            //--------------------------------------------------------
+
             new ActivityInfo("===MyLocationConfiguration===",
                     "|__________",
                     null),
-            new ActivityInfo("MyLocationConfiguration",
-                    "",
+
+            new ActivityInfo("设置三种定位模式，自定义图标，方向传感器",
+                    "LocationMode.FOLLOWING\n" +
+                            "LocationMode.NORMAL\n" +
+                            "LocationMode.COMPASS\n" +
+                            "mBaiduMap.setMyLocationConfiguration(MyLocationConfiguration)\n" +
+                            "SensorUtil.registerSensor(context, OnSensorChangedListener)\n" +
+                            "SensorUtil.unRegisterSensor()",
                     MyLocationConfigurationActivity.class),
 
     };

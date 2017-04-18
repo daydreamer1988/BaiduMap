@@ -99,6 +99,7 @@ public class LocationActivity extends AppCompatActivity {
 //      GpsUtil.unregisterContentObserver(this,contentObserver);
     }
 
+    //点击开始定位
     public void startLocate(View view) {
 
         mBaiduLocationManager = MyApplication.getLocationManager();

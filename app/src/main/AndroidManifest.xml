@@ -73,9 +73,11 @@
         <activity android:name=".activities.BasicMap.BaiduHeatMapActivity" />
         <activity android:name=".activities.BasicMap.IsShowPoiActivity" />
         <activity android:name=".activities.BasicMap.UiSettingsActivity" />
-        <activity android:name=".activities.BasicMap.InfoWindowActivity"></activity>
-        <activity android:name=".activities.BasicMap.InfoWindowActivity2"></activity>
-        <activity android:name=".activities.BasicMap.InfoWindowActivity3"></activity>
+        <activity android:name=".activities.BasicMap.InfoWindowActivity" />
+        <activity android:name=".activities.BasicMap.InfoWindowActivity2" />
+        <activity android:name=".activities.BasicMap.InfoWindowActivity3" />
+        <activity android:name=".activities.BasicMap.ProjectionActivity" />
+        <activity android:name=".activities.BasicMap.MyLocationSimpleActivity"></activity>
     </application>
 
 </manifest>
