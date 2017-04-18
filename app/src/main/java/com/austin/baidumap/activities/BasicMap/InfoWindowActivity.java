@@ -12,8 +12,6 @@ import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.InfoWindow;
 import com.baidu.mapapi.map.MapPoi;
-import com.baidu.mapapi.map.MapStatus;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.TextureMapView;
@@ -48,19 +46,6 @@ public class InfoWindowActivity extends AppCompatActivity {
         mMapView = (TextureMapView) findViewById(R.id.mapView);
         mBaiduMap = mMapView.getMap();
 
-        mBaiduMap.setOnMapClickListener(new BaiduMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                mBaiduMap.clear();
-            }
-
-            @Override
-            public boolean onMapPoiClick(MapPoi mapPoi) {
-                mBaiduMap.clear();
-                return false;
-            }
-        });
-
         mBaiduMap.setOnMapLongClickListener(new BaiduMap.OnMapLongClickListener() {
             @Override
             public void onMapLongClick(LatLng latLng) {
@@ -74,8 +59,9 @@ public class InfoWindowActivity extends AppCompatActivity {
                 infoWindow = getInfoWindow(marker);
                 mBaiduMap.showInfoWindow(infoWindow);
                 //解决一开始显示InfoWindow就显示两层
-                mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(new MapStatus.Builder().overlook(0).build()));
+                //mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(new MapStatus.Builder().overlook(0).build()));
 
+                //更新数据
                 mMapView.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -89,26 +75,18 @@ public class InfoWindowActivity extends AppCompatActivity {
             }
         });
 
-        /**
-         * 可删除
-         */
-       /* mBaiduMap.setOnMapStatusChangeListener(new BaiduMap.OnMapStatusChangeListener() {
+        mBaiduMap.setOnMapClickListener(new BaiduMap.OnMapClickListener() {
             @Override
-            public void onMapStatusChangeStart(MapStatus mapStatus) {
-
+            public void onMapClick(LatLng latLng) {
+                mBaiduMap.clear();
             }
 
             @Override
-            public void onMapStatusChange(MapStatus mapStatus) {
-
+            public boolean onMapPoiClick(MapPoi mapPoi) {
+                mBaiduMap.clear();
+                return false;
             }
-
-            @Override
-            public void onMapStatusChangeFinish(MapStatus mapStatus) {
-                mBaiduMap.showInfoWindow(infoWindow);
-            }
-        });*/
-
+        });
     }
 
     private InfoWindow getInfoWindow(Marker marker) {
@@ -127,14 +105,10 @@ public class InfoWindowActivity extends AppCompatActivity {
     private int getResourcesHeight() {
         BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.mipmap.ic_place);
         return bitmapDescriptor.getBitmap().getHeight();
-
     }
 
-    private void dismissInfoWindow() {
-    }
 
     private void addMarker(LatLng latLng) {
-
         Bundle bundle = new Bundle();
         bundle.putString("key", ""+index++);
         bundle.putString("uuid", UUID.randomUUID().toString());

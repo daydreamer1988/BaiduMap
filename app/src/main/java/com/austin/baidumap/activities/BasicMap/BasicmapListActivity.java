@@ -158,6 +158,13 @@ public class BasicmapListActivity extends AppCompatActivity {
                             "mBaiduMap.hideInfoWindow()\n" +
                             "new InfoWindow(View, LatLng, yOffset)",
                     InfoWindowActivity2.class),
+
+            new ActivityInfo("InfoWindow显示及隐藏（三推荐）",
+                    "mBaiduMap.showInfoWindow(InfoWindow)\n" +
+                    "mBaiduMap.hideInfoWindow()\n" +
+                    "new InfoWindow(View,LatLng,yOffset,OnInfoWindowClickListener)",
+                    InfoWindowActivity3.class),
+
             //--------------------------------------------------------
             new ActivityInfo("===MapStatus, MapStatus.Builder, MapStatusUpdate, MapStatusUpdateFactory===",
                     "|__________",

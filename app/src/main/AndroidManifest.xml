@@ -75,6 +75,7 @@
         <activity android:name=".activities.BasicMap.UiSettingsActivity" />
         <activity android:name=".activities.BasicMap.InfoWindowActivity"></activity>
         <activity android:name=".activities.BasicMap.InfoWindowActivity2"></activity>
+        <activity android:name=".activities.BasicMap.InfoWindowActivity3"></activity>
     </application>
 
 </manifest>
