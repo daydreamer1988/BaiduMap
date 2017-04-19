@@ -77,7 +77,8 @@
         <activity android:name=".activities.BasicMap.InfoWindowActivity2" />
         <activity android:name=".activities.BasicMap.InfoWindowActivity3" />
         <activity android:name=".activities.BasicMap.ProjectionActivity" />
-        <activity android:name=".activities.BasicMap.MyLocationSimpleActivity"></activity>
+        <activity android:name=".activities.BasicMap.MyLocationSimpleActivity" />
+        <activity android:name=".activities.BasicMap.MapStatusLimitActivity"></activity>
     </application>
 
 </manifest>

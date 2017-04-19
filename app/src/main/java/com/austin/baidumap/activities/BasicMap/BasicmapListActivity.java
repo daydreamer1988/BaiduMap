@@ -87,6 +87,12 @@ public class BasicmapListActivity extends AppCompatActivity {
             new ActivityInfo("获得初始经纬度",
                     "mBaiduMap.getMapStatus().target",
                     GetInitialLatLntActivity.class),
+
+            new ActivityInfo("MapStatusLimit",
+                    "mBaiduMap.getMapStatusLimit()\n" +
+                    "mBaiduMap.setMapStatusLimits(LatLngBounds)\n" +
+                    "在OnMapLoadedCallback.onMapLoaded() 之后设置才生效",
+                    MapStatusLimitActivity.class),
             new ActivityInfo("地图操作监听",
                     "mBaiduMap.setOnMapTouchListener()\n" +
                     "mBaiduMap.setOnMapClickListener()\n" +
@@ -198,11 +204,17 @@ public class BasicmapListActivity extends AppCompatActivity {
 
             new ActivityInfo("设置三种定位模式，自定义图标，方向传感器",
                     "LocationMode.FOLLOWING\n" +
-                            "LocationMode.NORMAL\n" +
-                            "LocationMode.COMPASS\n" +
-                            "mBaiduMap.setMyLocationConfiguration(MyLocationConfiguration)\n" +
-                            "SensorUtil.registerSensor(context, OnSensorChangedListener)\n" +
-                            "SensorUtil.unRegisterSensor()",
+                    "LocationMode.NORMAL\n" +
+                    "LocationMode.COMPASS\n" +
+                    "mBaiduMap.setMyLocationConfiguration(MyLocationConfiguration)\n" +
+                    "SensorUtil.registerSensor(context, OnSensorChangedListener)\n" +
+                    "SensorUtil.unRegisterSensor()\n" +
+                    "mBaiduMap.getLocationConfiguration()\n" +
+                    "mBaiduMap.setMyLocationConfiguration()\n" +
+                    "只有先允许定位图层后设置定位图层配置信息才会生效\n" +
+                    "mBaiduMap.setMyLocationData\n" +
+                    "只有先允许定位图层后设置数据才会生效\n" +
+                            "mBaiduMap.getLocationData()在未设置前返回为NULL",
                     MyLocationConfigurationActivity.class),
 
     };

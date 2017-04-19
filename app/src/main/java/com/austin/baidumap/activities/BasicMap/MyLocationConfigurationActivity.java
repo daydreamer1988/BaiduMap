@@ -8,6 +8,7 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.austin.baidumap.BaiduLocationManager;
 import com.austin.baidumap.MyApplication;
@@ -54,6 +55,8 @@ public class MyLocationConfigurationActivity extends AppCompatActivity {
 
         startLocation();
 
+        MyLocationData locationData = mBaiduMap.getLocationData();
+
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -78,6 +81,14 @@ public class MyLocationConfigurationActivity extends AppCompatActivity {
                         ));
                         break;
                 }
+            }
+        });
+
+        mBaiduMap.setOnMyLocationClickListener(new BaiduMap.OnMyLocationClickListener() {
+            @Override
+            public boolean onMyLocationClick() {
+                Toast.makeText(MyLocationConfigurationActivity.this, "mylocation clicked", Toast.LENGTH_SHORT).show();
+                return false;
             }
         });
 
@@ -127,7 +138,6 @@ public class MyLocationConfigurationActivity extends AppCompatActivity {
                     animation.setAnimationListener(new Animation.AnimationListener() {
                         @Override
                         public void onAnimationStart(Animation animation) {
-
                         }
 
                         @Override
@@ -208,6 +218,7 @@ public class MyLocationConfigurationActivity extends AppCompatActivity {
             @Override
             public void onSensorChanged(double direction) {
                 mRealtimeDirection = direction;
+
                 MyLocationData myLocationData = new MyLocationData.Builder()
                         .direction((float) mRealtimeDirection)
                         .latitude(mRealtimeLatitude)
