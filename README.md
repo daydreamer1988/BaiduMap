@@ -68,6 +68,11 @@ LocationMode.Device_Sensors与LocationClientOption.LOC_SENSITIVITY_LOW对应
           或在状态更新时，让InfoWindow消失，状态结束后再显示。
 
 
+14. OverlayOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker)), R.drawable.ic_marker是一个svg文件，崩掉
+
+  IllegalArgumentException: marker's icon can not be null
+  
+  MarkerOptions.icon(Unknown Source)
 
 
 
