@@ -63,24 +63,7 @@ public class InfoWindowActivity3 extends AppCompatActivity {
         mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                //先取消前一次的runnable,不然导致
-                handler.removeCallbacks(action);
-
-                final Marker localMarker = marker;
-                infoWindow = getInfoWindow(marker);
-                mBaiduMap.showInfoWindow(infoWindow);
-
-                action = new Runnable() {
-                    @Override
-                    public void run() {
-                        //更新内容
-                        Bundle extraInfo = localMarker.getExtraInfo();
-                        extraInfo.putString("key", "fuck");
-                        infoWindow = getInfoWindow(localMarker);
-                        mBaiduMap.showInfoWindow(infoWindow);
-                    }
-                };
-                handler.postDelayed(action, 2000);
+                showInfoWindow(marker);
                 return false;
             }
         });
@@ -97,6 +80,27 @@ public class InfoWindowActivity3 extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    private void showInfoWindow(Marker marker) {
+        //先取消前一次的runnable,不然导致infowindow切换问题
+        handler.removeCallbacks(action);
+
+        final Marker localMarker = marker;
+        infoWindow = getInfoWindow(marker);
+        mBaiduMap.showInfoWindow(infoWindow);
+
+        action = new Runnable() {
+            @Override
+            public void run() {
+                //更新内容
+                Bundle extraInfo = localMarker.getExtraInfo();
+                extraInfo.putString("key", "fuck");
+                infoWindow = getInfoWindow(localMarker);
+                mBaiduMap.showInfoWindow(infoWindow);
+            }
+        };
+        handler.postDelayed(action, 2000);
     }
 
     private InfoWindow getInfoWindow(Marker marker) {

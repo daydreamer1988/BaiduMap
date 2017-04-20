@@ -72,6 +72,10 @@ public class BasicmapListActivity extends AppCompatActivity {
                     "MapView.setMapCustomEnable()",
                     CustomMapActivity.class),
 
+            new ActivityInfo("取消百度Logo，比例尺 ",
+                    "mMapView.removeViewAt(1)\n"+
+                    "mMapView.removeViewAt(2)",
+                    RemoveBaiduLogoActivity.class),
             //--------------------------------------------------------
 
             new ActivityInfo("===BaiduMap===", "|__________", null),
@@ -107,6 +111,11 @@ public class BasicmapListActivity extends AppCompatActivity {
                     "option.position(LatLng).animateType().icon().draggable()\n" +
                     "mBaiduMap.clear();//清空地图所有的Overlay覆盖物及InfoWindow",
                     MapViewTouchEventActivity.class),
+
+            new ActivityInfo("获取区域内所有的Marker",
+                    "List<Marker>:mBaiduMap.getMarkersInBounds(LatLngBounds)",
+                    GetMarkerInBoundsActivity.class),
+
             new ActivityInfo("获取、设置指南针位置，及设置指南针图片，与是否显示",
                     "mBaiduMap.getCompassPosition():Point\n" +
                     "mBaiduMap.setCompassPosition(Point)\n" +
@@ -144,11 +153,11 @@ public class BasicmapListActivity extends AppCompatActivity {
                     "uiSettings.setOverlookingGesturesEnabled()\n" +
                     "uiSettings.setCompassEnabled()\n" +
                     "uiSettings.setAllGesturesEnabled()\n" +
-                            "uiSettings.isZoomGesturesEnabled()\n" +
-                            "uiSettings.isScrollGesturesEnabled()\n" +
-                            "uiSettings.isRotateGesturesEnabled()\n" +
-                            "uiSettings.isOverlookingGesturesEnabled()\n" +
-                            "uiSettings.isCompassEnabled()",
+                    "uiSettings.isZoomGesturesEnabled()\n" +
+                    "uiSettings.isScrollGesturesEnabled()\n" +
+                    "uiSettings.isRotateGesturesEnabled()\n" +
+                    "uiSettings.isOverlookingGesturesEnabled()\n" +
+                    "uiSettings.isCompassEnabled()",
                     UiSettingsActivity.class),
 
 
