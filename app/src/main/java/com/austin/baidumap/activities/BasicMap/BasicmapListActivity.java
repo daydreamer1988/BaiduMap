@@ -113,7 +113,9 @@ public class BasicmapListActivity extends AppCompatActivity {
                     MapViewTouchEventActivity.class),
 
             new ActivityInfo("获取区域内所有的Marker",
-                    "List<Marker>:mBaiduMap.getMarkersInBounds(LatLngBounds)",
+                    "List<Marker>:mBaiduMap.getMarkersInBounds(LatLngBounds)\n"+
+                    "OverlayOptions 设置period（多少帧刷新一次图片）\n" +
+                            "可以解决动画卡顿问题，默认值20，要求大于0",
                     GetMarkerInBoundsActivity.class),
 
             new ActivityInfo("获取、设置指南针位置，及设置指南针图片，与是否显示",

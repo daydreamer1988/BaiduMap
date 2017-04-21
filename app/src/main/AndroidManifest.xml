@@ -80,7 +80,8 @@
         <activity android:name=".activities.BasicMap.MyLocationSimpleActivity" />
         <activity android:name=".activities.BasicMap.MapStatusLimitActivity" />
         <activity android:name=".activities.BasicMap.GetMarkerInBoundsActivity" />
-        <activity android:name=".activities.BasicMap.RemoveBaiduLogoActivity"></activity>
+        <activity android:name=".activities.BasicMap.RemoveBaiduLogoActivity" />
+        <activity android:name=".activities.ClusterActivity"></activity>
     </application>
 
 </manifest>

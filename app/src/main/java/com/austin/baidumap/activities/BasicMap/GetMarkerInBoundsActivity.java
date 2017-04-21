@@ -52,8 +52,10 @@ public class GetMarkerInBoundsActivity extends AppCompatActivity {
         index++;
         extrainfo.putString("key", ""+index);
         OverlayOptions options = new MarkerOptions()
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_place))
+//                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_place))
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker))
                 .position(latLng)
+                .period(1)
                 .animateType(MarkerOptions.MarkerAnimateType.grow)
                 .extraInfo(extrainfo);
 

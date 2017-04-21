@@ -14,6 +14,34 @@ import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
 
+
+/**
+ * 多个页面的解决方法：在父类的setContentView()方法中
+ *
+ */
+//    @Override
+//    public void setContentView(@LayoutRes int layoutResID) {
+//        super.setContentView(layoutResID);
+//        View map = findViewById(R.id.mapView);
+//        if(map instanceof MapView){
+//            ((MapView) map).removeViewAt(1);
+//            ((MapView) map).removeViewAt(2);
+//        }else if(map instanceof TextureMapView){
+//            ((TextureMapView) map).removeViewAt(1);
+//            ((TextureMapView) map).removeViewAt(2);
+//        }
+//
+//        View map1 = findViewById(R.id.mMapView);
+//        if(map1 instanceof MapView){
+//           ((MapView) map1).removeViewAt(1);
+//           ((MapView) map1).removeViewAt(2);
+//        }else if(map1 instanceof TextureMapView){
+//            ((TextureMapView) map1).removeViewAt(1);
+//            ((TextureMapView) map1).removeViewAt(2);
+//        }
+//    }
+
+
 public class RemoveBaiduLogoActivity extends AppCompatActivity {
     private TextureMapView mMapView;
     private BaiduMap mBaiduMap;

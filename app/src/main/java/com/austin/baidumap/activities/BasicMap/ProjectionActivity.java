@@ -75,7 +75,7 @@ public class ProjectionActivity extends AppCompatActivity {
         }
         OverlayOptions option = new MarkerOptions()
                 .position(latLng)
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_place))
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker))
                 .animateType(MarkerOptions.MarkerAnimateType.grow);
         mMarker = (Marker) mBaiduMap.addOverlay(option);
     }

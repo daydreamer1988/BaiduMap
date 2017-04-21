@@ -40,7 +40,7 @@ public class MapViewTouchEventActivity extends AppCompatActivity {
 
         mBaiduMap = mMapView.getMap();
 
-        bitmapDescripto = BitmapDescriptorFactory.fromResource(R.mipmap.ic_place);
+        bitmapDescripto = BitmapDescriptorFactory.fromResource(R.mipmap.marker);
 
         //触摸事件
         mBaiduMap.setOnMapTouchListener(new BaiduMap.OnMapTouchListener() {
@@ -176,7 +176,7 @@ public class MapViewTouchEventActivity extends AppCompatActivity {
             mMarker.remove();
         }
         MarkerOptions option = new MarkerOptions();
-        option.position(latLng).animateType(MarkerOptions.MarkerAnimateType.grow).icon(bitmapDescripto).draggable(true);
+        option.position(latLng).period(1).animateType(MarkerOptions.MarkerAnimateType.grow).icon(bitmapDescripto).draggable(true);
         mMarker = (Marker) mBaiduMap.addOverlay(option);
     }
 

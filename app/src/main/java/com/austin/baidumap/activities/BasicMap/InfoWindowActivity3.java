@@ -125,7 +125,7 @@ public class InfoWindowActivity3 extends AppCompatActivity {
     }
 
     private int getResourcesHeight() {
-        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.mipmap.ic_place);
+        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.mipmap.marker);
         return bitmapDescriptor.getBitmap().getHeight();
     }
 
@@ -137,7 +137,7 @@ public class InfoWindowActivity3 extends AppCompatActivity {
         MarkerOptions option = new MarkerOptions()
                 .animateType(MarkerOptions.MarkerAnimateType.grow)
                 .extraInfo(bundle)
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_place))
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker))
                 .position(latLng);
         mMarker = (Marker) mBaiduMap.addOverlay(option);
     }

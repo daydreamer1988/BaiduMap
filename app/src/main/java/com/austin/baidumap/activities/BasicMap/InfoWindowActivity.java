@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.austin.baidumap.R;
 import com.baidu.mapapi.map.BaiduMap;
@@ -103,8 +104,10 @@ public class InfoWindowActivity extends AppCompatActivity {
     }
 
     private int getResourcesHeight() {
-        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.mipmap.ic_place);
-        return bitmapDescriptor.getBitmap().getHeight();
+        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.mipmap.marker);
+        int height = bitmapDescriptor.getBitmap().getHeight();
+        Toast.makeText(this, "marker_height:"+ height, Toast.LENGTH_SHORT).show();
+        return height;
     }
 
 
@@ -115,7 +118,7 @@ public class InfoWindowActivity extends AppCompatActivity {
         MarkerOptions option = new MarkerOptions()
                 .animateType(MarkerOptions.MarkerAnimateType.grow)
                 .extraInfo(bundle)
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_place))
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker))
                 .position(latLng);
         mMarker = (Marker) mBaiduMap.addOverlay(option);
     }
