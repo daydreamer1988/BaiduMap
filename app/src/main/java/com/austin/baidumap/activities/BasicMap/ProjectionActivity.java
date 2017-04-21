@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.MotionEvent;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.OvershootInterpolator;
+import android.view.animation.Transformation;
 import android.widget.TextView;
 
 import com.austin.baidumap.R;
@@ -31,7 +35,6 @@ public class ProjectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_projection);
         mMapView = (TextureMapView) findViewById(R.id.mapView);
         mTextView3 = (TextView) findViewById(R.id.textView3);
-
         mBaiduMap = mMapView.getMap();
 
         mBaiduMap.setOnMapTouchListener(new BaiduMap.OnMapTouchListener() {
@@ -62,11 +65,32 @@ public class ProjectionActivity extends AppCompatActivity {
         Point point = mBaiduMap.getProjection().toScreenLocation(latLng);
         LatLng latLng1 = mBaiduMap.getProjection().fromScreenLocation(point);
         String info =
-                "<br><b>原始XY：OnMapTouchListener</b><br>"+new Point((int)x, (int)y).toString()+
+                "<b>原始XY：OnMapTouchListener</b><br>"+new Point((int)x, (int)y).toString()+
                 "<br><b>原始LatLng:setOnMapClickListener</b><br>"+latLng.toString()+
                 "<br><b>ProjectionXY:mProjection().toScreenLocation(latLng)</b><br>"+point.toString()+
                 "<br><b>ProjectionLatLng：mProjection().fromScreenLocation(point)</b><br>"+latLng1.toString();
         mTextView3.setText(Html.fromHtml(info));
+
+
+        int lineHeight = mTextView3.getLineHeight();
+        int lineCount = mTextView3.getLineCount();
+
+        final int dalta = lineCount * lineHeight;
+
+        Animation animation = new Animation() {
+            @Override
+            protected void applyTransformation(float interpolatedTime, Transformation t) {
+                super.applyTransformation(interpolatedTime, t);
+                float height = dalta * interpolatedTime;
+                        ViewGroup.LayoutParams layoutParams = mTextView3.getLayoutParams();
+                        layoutParams.height = (int) height;
+                mBaiduMap.setPadding(0, (int) height, 0, 0);
+            }
+        };
+        animation.setDuration(500);
+        animation.setInterpolator(new OvershootInterpolator());
+        mTextView3.startAnimation(animation);
+
     }
 
     private void addMarker(LatLng latLng) {

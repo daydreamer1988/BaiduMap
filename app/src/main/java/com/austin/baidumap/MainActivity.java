@@ -11,6 +11,7 @@ import android.widget.ListView;
 import com.austin.baidumap.activities.BasicMap.BasicmapListActivity;
 import com.austin.baidumap.activities.ClusterActivity;
 import com.austin.baidumap.activities.LocationActivity;
+import com.austin.baidumap.activities.SimpleApp.SimpleApplicationListActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         data.add("基础定位");
         data.add("基础地图");
         data.add("点聚合");
+        data.add("简单应用");
         return data;
     }
 
@@ -54,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 2:
                     clz = ClusterActivity.class;
+                    break;
+                case 3:
+                    clz = SimpleApplicationListActivity.class;
 
             }
 

@@ -140,7 +140,10 @@ public class BasicmapListActivity extends AppCompatActivity {
                     IsShowPoiActivity.class),
             new ActivityInfo("Projection(OnMapLoadedCallback.onMapLoaded()之后才正常)",
                     "mProjection().toScreenLocation(latLng)\n" +
-                    "mProjection().fromScreenLocation(point)",
+                    "mProjection().fromScreenLocation(point)\n\n" +
+                            "mBaiduMap.setPadding(left,top,right,bottom)deprecated方法\n" +
+                            "注意不是mBaiduMap.setViewPadding()方法\n" +
+                            "该方法的优点是，适配了中心点不受覆盖物的影响，始终在中心点",
                     ProjectionActivity.class),
 
             //--------------------------------------------------------

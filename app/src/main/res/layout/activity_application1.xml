@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent">
 
     <com.baidu.mapapi.map.TextureMapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
+        android:layout_marginBottom="150dp"
         android:layout_height="match_parent">
-
     </com.baidu.mapapi.map.TextureMapView>
 
     <TextView
-        android:background="@color/white"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bottomLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/textView3" />
+        android:background="@color/colorAccent"
+        android:layout_height="150dp">
+
+
+
+    </TextView>
 
 </RelativeLayout>
