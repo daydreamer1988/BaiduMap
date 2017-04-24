@@ -29,6 +29,10 @@ public class SimpleApplicationListActivity extends AppCompatActivity {
                         "地图MapStatus.target使终保持在地图中心",
                         Application1Activity.class),
 
+                new ActivityInfo("移动Zoom效果",
+                        "设置地图ZoomOut ZoomIn动画",
+                        Application2Activity.class),
+
         };
 
         mListView.setAdapter(new MyBaseAdapter());
@@ -43,7 +47,7 @@ public class SimpleApplicationListActivity extends AppCompatActivity {
 
     }
 
-    class ActivityInfo{
+    static class ActivityInfo{
         private final String title;
         private final String desc;
         private final Class clz;

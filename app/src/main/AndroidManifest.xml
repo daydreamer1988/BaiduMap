@@ -83,7 +83,14 @@
         <activity android:name=".activities.BasicMap.RemoveBaiduLogoActivity" />
         <activity android:name=".activities.ClusterActivity" />
         <activity android:name=".activities.SimpleApp.SimpleApplicationListActivity" />
-        <activity android:name=".activities.SimpleApp.Application1Activity"></activity>
+        <activity android:name=".activities.SimpleApp.Application1Activity" />
+        <activity android:name=".activities.Overlays.OverlayListActivity" />
+        <activity android:name=".activities.Overlays.DotOverlayActivity" />
+        <activity android:name=".activities.Overlays.ArcOverlayActivity" />
+        <activity android:name=".activities.Overlays.CircleOverlayActivity" />
+        <activity android:name=".activities.Overlays.PolyLineOverlayActivity" />
+        <activity android:name=".activities.Overlays.TextOverlayActivity" />
+        <activity android:name=".activities.SimpleApp.Application2Activity"></activity>
     </application>
 
 </manifest>

@@ -11,6 +11,7 @@ import android.widget.ListView;
 import com.austin.baidumap.activities.BasicMap.BasicmapListActivity;
 import com.austin.baidumap.activities.ClusterActivity;
 import com.austin.baidumap.activities.LocationActivity;
+import com.austin.baidumap.activities.Overlays.OverlayListActivity;
 import com.austin.baidumap.activities.SimpleApp.SimpleApplicationListActivity;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         data.add("基础地图");
         data.add("点聚合");
         data.add("简单应用");
+        data.add("Overlay:视图之外Overlay消失");
         return data;
     }
 
@@ -59,7 +61,12 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 3:
                     clz = SimpleApplicationListActivity.class;
-
+                    break;
+                case 4:
+                    clz = OverlayListActivity.class;
+                    break;
+                default:
+                    break;
             }
 
             startActivity(new Intent(MainActivity.this, clz));

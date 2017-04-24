@@ -1,31 +1,16 @@
 package com.austin.baidumap.utils;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Point;
-import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
-import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.austin.baidumap.R;
-import com.austin.baidumap.activities.BasicMap.InfoWindowActivity3;
 import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BitmapDescriptor;
-import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.InfoWindow;
+import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.Projection;
 import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.model.LatLngBounds;
-
-import static android.R.attr.value;
 
 
 /**
@@ -60,5 +45,40 @@ public class MapUtil {
         LatLng bottomLeft = projection.fromScreenLocation(new Point(0, height));
         LatLngBounds.Builder builder = new LatLngBounds.Builder().include(topRight).include(bottomLeft);
         return builder.build();
+    }
+
+    /**
+     * 设置地图ZoomOut ZoomIn动画
+     * @param mBaiduMap
+     * @param duration
+     * @param targetLatLng
+     */
+    public static void animateOutAndIn(final BaiduMap mBaiduMap, final int duration, final LatLng targetLatLng) {
+        LatLngBounds bound = mBaiduMap.getMapStatus().bound;
+        if(!bound.contains(targetLatLng)) {
+            final int zoomDelta = 2;
+            final float startZoom = mBaiduMap.getMapStatus().zoom;
+
+            final MapStatus mapStatus = new MapStatus.Builder()
+                    .target(targetLatLng)
+                    .zoom(startZoom-zoomDelta)
+                    .build();
+
+            mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(mapStatus), duration);
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    MapStatus mapStatus = new MapStatus.Builder()
+                            .target(targetLatLng)
+                            .zoom(startZoom)
+                            .build();
+                    mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(mapStatus), duration / 2);
+                }
+            }, duration / 4);
+        }else{//在屏幕内直接移动，不绽放
+            mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newLatLng(targetLatLng), duration/2);
+        }
+
     }
 }
