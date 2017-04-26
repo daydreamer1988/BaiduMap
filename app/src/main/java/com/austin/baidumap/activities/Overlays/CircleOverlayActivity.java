@@ -74,7 +74,6 @@ public class CircleOverlayActivity extends AppCompatActivity {
             @Override
             public boolean onMapPoiClick(MapPoi mapPoi) {
                 addCircle(mapPoi.getPosition());
-
                 return false;
             }
         });

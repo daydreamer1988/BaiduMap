@@ -90,7 +90,13 @@
         <activity android:name=".activities.Overlays.CircleOverlayActivity" />
         <activity android:name=".activities.Overlays.PolyLineOverlayActivity" />
         <activity android:name=".activities.Overlays.TextOverlayActivity" />
-        <activity android:name=".activities.SimpleApp.Application2Activity"></activity>
+        <activity android:name=".activities.SimpleApp.Application2Activity" />
+        <activity android:name=".activities.Searchs.SearchListActivity" />
+        <activity android:name=".activities.Searchs.GeocodeActivity" />
+        <activity
+            android:name=".activities.BasicMap.ChangeEventActivity"
+            android:label="@string/title_activity_change_event" />
+        <activity android:name=".activities.Searchs.PoiSearchActivity"></activity>
     </application>
 
 </manifest>

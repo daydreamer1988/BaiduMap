@@ -12,6 +12,7 @@ import com.austin.baidumap.activities.BasicMap.BasicmapListActivity;
 import com.austin.baidumap.activities.ClusterActivity;
 import com.austin.baidumap.activities.LocationActivity;
 import com.austin.baidumap.activities.Overlays.OverlayListActivity;
+import com.austin.baidumap.activities.Searchs.SearchListActivity;
 import com.austin.baidumap.activities.SimpleApp.SimpleApplicationListActivity;
 
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         data.add("点聚合");
         data.add("简单应用");
         data.add("Overlay:视图之外Overlay消失");
+        data.add("检索");
         return data;
     }
 
@@ -64,6 +66,10 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 4:
                     clz = OverlayListActivity.class;
+                    break;
+
+                case 5:
+                    clz = SearchListActivity.class;
                     break;
                 default:
                     break;

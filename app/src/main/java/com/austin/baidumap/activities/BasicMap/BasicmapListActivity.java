@@ -112,6 +112,10 @@ public class BasicmapListActivity extends AppCompatActivity {
                     "mBaiduMap.clear();//清空地图所有的Overlay覆盖物及InfoWindow",
                     MapViewTouchEventActivity.class),
 
+            new ActivityInfo("更改手势监听",
+                    "不能重写父类，只能post Runnable",
+                    ChangeEventActivity.class),
+
             new ActivityInfo("获取区域内所有的Marker",
                     "List<Marker>:mBaiduMap.getMarkersInBounds(LatLngBounds)\n"+
                     "OverlayOptions 设置period（多少帧刷新一次图片）\n" +

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BaiduMap</string>
+    <string name="title_activity_change_event">ChangeEventActivity</string>
 </resources>

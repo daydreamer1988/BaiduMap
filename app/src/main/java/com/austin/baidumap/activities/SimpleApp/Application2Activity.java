@@ -25,6 +25,7 @@ public class Application2Activity extends AppCompatActivity {
 
     private float targetZoom = 7;
     private LatLng targetLatLng;
+    private MapStatus.Builder mapStatus1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +78,6 @@ public class Application2Activity extends AppCompatActivity {
         mBaiduMap.setOnMapStatusChangeListener(new BaiduMap.OnMapStatusChangeListener() {
             @Override
             public void onMapStatusChangeStart(MapStatus mapStatus) {
-
             }
 
             @Override
@@ -89,8 +89,6 @@ public class Application2Activity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     @Override
@@ -132,6 +130,8 @@ public class Application2Activity extends AppCompatActivity {
     }
 
     public void startZoom(View view) {
-        MapUtil.animateOutAndIn(mBaiduMap, 1000, targetLatLng);
+        MapUtil.animateOutAndIn(mBaiduMap, 2000, targetLatLng);
     }
+
+
 }
