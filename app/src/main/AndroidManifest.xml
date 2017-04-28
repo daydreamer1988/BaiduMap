@@ -96,7 +96,13 @@
         <activity
             android:name=".activities.BasicMap.ChangeEventActivity"
             android:label="@string/title_activity_change_event" />
-        <activity android:name=".activities.Searchs.PoiSearchActivity"></activity>
+        <activity android:name=".activities.Searchs.PoiCitySearchActivity" />
+        <activity
+            android:name=".activities.Searchs.PoiNearbySearchActivity"
+            android:label="@string/title_activity_poi_nearby_search" />
+        <activity android:name=".activities.Searchs.PoiBoundSearchActivity" />
+        <activity android:name=".activities.Searchs.DistrictSearchActivity" />
+        <activity android:name=".activities.Searchs.SuggestionSearchActivity"></activity>
     </application>
 
 </manifest>

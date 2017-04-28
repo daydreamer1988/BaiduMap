@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+
+
+
+    <com.baidu.mapapi.map.TextureMapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></com.baidu.mapapi.map.TextureMapView>
+
+    <EditText
+        android:visibility="gone"
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/et_bg"
+        android:hint="请搜索您的小区或大厦、街道的名称"
+        android:drawableLeft="@mipmap/ic_place"
+        android:drawablePadding="5dp"
+        />
+
+</RelativeLayout>

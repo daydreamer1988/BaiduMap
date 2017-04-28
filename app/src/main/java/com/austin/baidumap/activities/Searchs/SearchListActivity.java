@@ -29,13 +29,53 @@ public class SearchListActivity extends AppCompatActivity {
                     "GeoCoder.newInstance()\n" +
                     "coder.setOnGetGeoCodeResultListener()\n" +
                     "GeoCodeOption.city().address()\n" +
-                    "   coder.geocode()\n"+
+                    "   coder.geocode(GeoCodeOption)\n"+
                     "ReverseGeoCodeOption.location()\n" +
-                    "   coder.reverseGeoCode()",
+                    "   coder.reverseGeoCode(ReverseGeoCodeOption)\n" +
+                    "coder.destroy()",
                     GeocodeActivity.class),
-            new ActivityInfo("Poi检索",
-                    "",
-                    PoiSearchActivity.class),
+            new ActivityInfo("Poi City检索",
+                    "PoiSearch.newInstance()\n" +
+                    "poiSearch.setOnGetPoiSearchResultListener()\n" +
+                    "   onGetPoiResult()\n" +
+                    "   onGetPoiDetailResult()\n"+
+                    "PoiCitySearchOption.city().keyword()\n" +
+                    "   .pageCapacity().pageNum(pageIndex)\n" +
+                    "poiSearch.searchInCity(PoiCitySearchOption)\n" +
+                    "poiSearch.searchPoiDetail(new PoiDetailSearchOption().poiUid(poiInfo.uid))",
+                    PoiCitySearchActivity.class),
+
+            new ActivityInfo("Poi Nearby检索",
+                    "PoiNearbySearchOption\n" +
+                    "   .keyword().location(latLng).radius()\n" +
+                    "   .pageCapacity(20).pageNum(pageIndex).sortType()\n" +
+                    "poiSearch.searchNearby(option);\n\n" +
+                    "PoiSortType.distance_from_near_to_far\n"+
+                    "PoiSortType.comprehensive\n\n" +
+                    "poiSearch.searchNearby(PoiNearbySearchOption)",
+                    PoiNearbySearchActivity.class),
+
+            new ActivityInfo("Poi Bound检索",
+                    "貌似百度地图有BUG\n" +
+                    "PoiBoundSearchOption.keyword().bound(LatLngBounds)\n" +
+                    ".pageCapacity().pageNum(pageIndex);\n" +
+                    "poiSearch.searchInBound(option);",
+                    PoiBoundSearchActivity.class),
+
+            new ActivityInfo("District 检索",
+                    "DistrictSearch.newInstance()\n" +
+                    "districtSearch.setOnDistrictSearchListener()\n" +
+                    "districtSearchOption.cityName().districtName();\n" +
+                    "districtSearch.searchDistrict(option);",
+                    DistrictSearchActivity.class),
+
+            new ActivityInfo("Suggestion 检索",
+                    "SuggestionSearch.newInstance()\n" +
+                    "suggestionSearch.setOnGetSuggestionResultListener()\n" +
+                    "suggestionSearchOption.city(mCity).keyword()\n" +
+                    "suggestionSearch.requestSuggestion(suggestionSearchOption);",
+                    SuggestionSearchActivity.class),
+
         };
 
         mListView.setAdapter(new SearchListAdapter());
